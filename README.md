@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+# PocketLens: Your AI-Powered Financial Navigator
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔖 Project Title & Description
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+PocketLens is an intelligent personal finance web application that helps users effortlessly track, understand, and optimize their spending. It eliminates the hassle of manual data entry by using a powerful AI-driven receipt scanning feature. Users simply snap a photo of a receipt, and PocketLens automatically logs the transaction, categorizes it, and provides real-time financial insights.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Who it's for:**
+Individuals who want a clearer picture of their spending habits without the tedious work of logging every transaction. PocketLens is for anyone who wants to make smarter financial decisions and gain a deeper understanding of their cash flow.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Why it matters:**
+In today's fast-paced world, managing personal finances is often neglected due to the time and effort it requires. PocketLens simplifies this process, turning a chore into a simple task and empowering users to take control of their financial health with minimal effort. By providing powerful insights from unstructured data (receipts), it gives users a tool that goes beyond traditional budgeting apps.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Frontend & Backend (Full-Stack in One)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **Framework:** [Next.js](https://nextjs.org/)
 
-## Deploy on Vercel
+  * Reason: Next.js provides both frontend (React) and backend (API routes) in a single framework. This reduces complexity (no need for a separate FastAPI backend) and makes deployment smoother on platforms like Vercel.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/) for responsive, mobile-first design.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Charts:** [Recharts](https://recharts.org/) for intuitive data visualization of spending trends.
+
+### Backend APIs & Services
+
+* **API Routes:** Built using Next.js API routes (instead of FastAPI) to handle tasks like uploading receipts, fetching transactions, and integrating with AI services.
+
+  * Reason: Reduces the need to maintain a separate backend service and keeps all logic inside the same monorepo.
+
+* **AI/ML Processing:**
+
+  * Use **serverless functions** in Next.js to call external APIs (e.g., OCR, Gemini).
+  * For lightweight categorization, we can use **TensorFlow\.js** on the server if we want to avoid Python dependencies.
+
+### Database, Authentication, & Storage
+
+* **Database:** [Firebase Firestore](https://firebase.google.com/docs/firestore) for a NoSQL real-time document database.
+
+  * Alternative: [Supabase](https://supabase.com/) if we want SQL + edge functions.
+
+* **Authentication:** [NextAuth.js](https://next-auth.js.org/) integrated with Firebase or Supabase.
+
+  * Reason: NextAuth works seamlessly with Next.js and provides secure OAuth/email login.
+
+* **Object Storage:** Firebase Storage (or Supabase Storage) for receipt image uploads.
+
+### AI Services & APIs
+
+* **Receipt OCR:** [Google Cloud Vision API](https://cloud.google.com/vision) for extracting text from receipt images.
+* **Natural Language Querying:** [Google Gemini API](https://ai.google.dev/) to let users ask financial questions in plain English.
+
+---
+
+## 🧠 AI Integration Strategy (The M.A.S.T.E.R. Plan)
+
+We will use a comprehensive AI-powered workflow to maximize productivity and ensure a high-quality codebase.
+
+* **M**odel Scaffolding & Generation
+* **A**utomatic Testing
+* **S**mart Documentation
+* **T**ooling & Context-Awareness
+* **E**rror Analysis
+* **R**efactoring
+
+---
+
+### Code Generation & Scaffolding
+
+* **API Endpoints:** Use AI to scaffold Next.js API routes (`/api/upload-receipt`, `/api/get-transactions`).
+* **React Components:** AI-generated UI components like `ReceiptScanner.tsx` and `InsightsDashboard.tsx`, styled with Tailwind.
+* **Database Models:** Schema definitions for Firestore collections (or Supabase tables).
+
+---
+
+### Testing
+
+* **Unit Tests:** Jest + React Testing Library for UI components.
+* **Integration Tests:** Playwright/Cypress to simulate workflows like uploading a receipt and checking dashboard updates.
+
+---
+
+### Documentation
+
+* **Docstrings & Inline Comments:** Auto-generate explanations for major functions in both frontend and API routes.
+* **README.md:** AI-assisted updates to keep architecture docs aligned with code changes.
+
+---
+
+### Context-Aware Techniques
+
+* Provide the AI with:
+
+  * Project file tree (helps AI place new routes/components correctly).
+  * API specs (`/api/get-transactions` response shape).
+  * Code diffs when debugging/refactoring.
+
+---
